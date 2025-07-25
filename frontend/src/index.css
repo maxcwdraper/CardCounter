@@ -1,8 +1,11 @@
 @import "tailwindcss";
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  background-color: black;
+@theme {
+  --color-default: #3e5448;
+  --color-offdefault: #5b8249;
+  --color-blinding: #eee0c5;
+  --color-offblinding: #d7cab2;
+  --color-yellowy: #eca313;
+  --color-niceorange: #da8021;
+  --aspect-card: "7/10";
 }
