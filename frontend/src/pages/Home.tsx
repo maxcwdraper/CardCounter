@@ -1,8 +1,10 @@
+import CardCounterLogo from "../assets/CardCounterLogo.svg";
+
 const Home: React.FC = () => {
   return (
-    <div className="">
-      <h1 className="flex w-dvw items-center justify-center pt-15 text-7xl dark:text-black">WELCOME</h1>
-      <p className="flex items-center justify-center text-lg pt-10">your deck id is: vttfh1q35wgn</p>
+    <div className="w-screen h-full">
+      <h1 className="flex w-full items-center justify-center pt-15 text-7xl text-black">WELCOME</h1>
+      <img src={CardCounterLogo} className="flex w-full items-center justify-center p-72" />
     </div>
   );
 };

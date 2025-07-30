@@ -1,27 +1,27 @@
 import { useEffect, useState } from "react";
+
 import CardBase from "../components/CardBase.tsx";
+import type { ApiResponse, DeckResponse } from "./Deck.tsx";
 import type { CardBaseProps } from "../components/CardBase.tsx";
+import cardEditors from "../components/CardEditorList.tsx";
 import club from "../assets/club.svg";
 import diamond from "../assets/diamond.svg";
 import heart from "../assets/heart.svg";
 import spade from "../assets/spade.svg";
 
-export type DeckResponse = {
-  deck_id: string;
-};
-
-export type ApiResponse = {
-  cards: {
-    value: string;
-    suit: string;
-  }[];
-};
-
-const Deck: React.FC = () => {
+const CustomDeck: React.FC = () => {
   const [cards, setCards] = useState<CardBaseProps[]>([]);
   useEffect(() => {
     const fetchCards = async () => {
-      const deckIdCreatorUrl: string = `https://deckofcardsapi.com/api/deck/new/?cards=AC,AD,AH,AS,2C,2D,2H,2S,3C,3D,3H,3S,4C,4D,4H,4S,5C,5D,5H,5S,6C,6D,6H,6S,7C,7D,7H,7S,8C,8D,8H,8S,9C,9D,9H,9S,0C,0D,0H,0S,JC,JD,JH,JS,QC,QD,QH,QS,KC,KD,KH,KS`;
+      const encodedCards: string[] = [];
+      for (let encodedValue in cardEditors) {
+        for (let i = 0; i < cardEditors[encodedValue].quantity; i++) {
+          encodedCards.push(encodedValue);
+        }
+      }
+      const encodedCardsString: string = encodedCards.join(",");
+      const deckIdCreatorUrl: string = `https://deckofcardsapi.com/api/new/?cards=${encodedCardsString}`;
+      const componentLengthArray: string[] = deckIdCreatorUrl.split(",");
       try {
         const deckIdResponse = await fetch(deckIdCreatorUrl);
         if (!deckIdResponse.ok) {
@@ -29,7 +29,7 @@ const Deck: React.FC = () => {
         }
         const deckIdJson: DeckResponse = await deckIdResponse.json();
         const deckId: string = deckIdJson.deck_id;
-        const url: string = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=52`;
+        const url: string = `https://deckofcardsapi.com/api/deck/${deckId}/draw/?count=${componentLengthArray.length}`;
         try {
           const response = await fetch(url);
           if (!response.ok) {
@@ -69,7 +69,6 @@ const Deck: React.FC = () => {
                 suit = spade;
                 break;
             }
-
             return { suit: suit, cardNumber: value };
           });
           setCards(converted);
@@ -82,7 +81,6 @@ const Deck: React.FC = () => {
     };
     fetchCards();
   }, []);
-
   return (
     <div className="min-w-screen w-dvw min-h-screen pt-10 pb-10">
       <div className="flex flex-wrap justify-around w-full h-auto gap-5">
@@ -94,4 +92,4 @@ const Deck: React.FC = () => {
   );
 };
 
-export default Deck;
+export default CustomDeck;

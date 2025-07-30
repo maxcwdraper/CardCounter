@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 import CardBase from "./CardBase.tsx";
+import cardEditors from "../components/CardEditorList.tsx";
 import club from "../assets/club.svg";
 import diamond from "../assets/diamond.svg";
 import heart from "../assets/heart.svg";
 import spade from "../assets/spade.svg";
 
 type CardEditorProps = {
+  quantity: number;
+  value: number;
   suit: string;
   cardNumber: string;
-  value: number;
-  quantity: number;
 };
 
-const CardEditor: React.FC<CardEditorProps> = ({ suit, cardNumber, value, quantity }) => {
+const CardEditor: React.FC<CardEditorProps> = ({ quantity, value, suit, cardNumber }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
   const [currentValue, setCurrentValue] = useState(value);
 
@@ -61,7 +62,6 @@ const CardEditor: React.FC<CardEditorProps> = ({ suit, cardNumber, value, quanti
       name = "King";
       break;
   }
-
   return (
     <div className="bg-offblinding w-50 h-110 rounded shadow-sm shadow-black">
       <div className="items-center self-center h-[60%] w-auto">
