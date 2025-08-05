@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 
 import CardBase from "../components/CardBase.tsx";
 import type { ApiResponse, DeckResponse } from "./Deck.tsx";
@@ -11,16 +12,20 @@ import spade from "../assets/spade.svg";
 
 const CustomDeck: React.FC = () => {
   const [cards, setCards] = useState<CardBaseProps[]>([]);
+  const location = useLocation();
+  const passedState = location.state as { cardEditors?: typeof cardEditors };
+  const editors = passedState?.cardEditors ?? cardEditors;
   useEffect(() => {
     const fetchCards = async () => {
       const encodedCards: string[] = [];
-      for (let encodedValue in cardEditors) {
-        for (let i = 0; i < cardEditors[encodedValue].quantity; i++) {
-          encodedCards.push(encodedValue);
+      for (const cardCode in editors) {
+        const { quantity } = editors[cardCode];
+        for (let i = 0; i < quantity; i++) {
+          encodedCards.push(cardCode);
         }
       }
       const encodedCardsString: string = encodedCards.join(",");
-      const deckIdCreatorUrl: string = `https://deckofcardsapi.com/api/new/?cards=${encodedCardsString}`;
+      const deckIdCreatorUrl: string = `https://deckofcardsapi.com/api/deck/new/?cards=${encodedCardsString}`;
       const componentLengthArray: string[] = deckIdCreatorUrl.split(",");
       try {
         const deckIdResponse = await fetch(deckIdCreatorUrl);
@@ -80,7 +85,7 @@ const CustomDeck: React.FC = () => {
       }
     };
     fetchCards();
-  }, []);
+  }, [passedState]);
   return (
     <div className="min-w-screen w-dvw min-h-screen pt-10 pb-10">
       <div className="flex flex-wrap justify-around w-full h-auto gap-5">

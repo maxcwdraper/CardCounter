@@ -9,7 +9,7 @@ const navs = [
 
 const Navbar: React.FC = () => {
   return (
-    <nav className="flex flex-row gap-10 justify-center w-full h-full dark:text-black dark:bg-default text-black bg-blinding rounded">
+    <nav className="flex flex-row gap-10 justify-center w-full h-full text-black bg-default rounded">
       <Link to="/" className="flex justify-center rounded hover:bg-offdefault">
         <img src={CardCounterLogo} className="w-60 self-center" />
       </Link>

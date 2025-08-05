@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 import CardBase from "./CardBase.tsx";
-import cardEditors from "../components/CardEditorList.tsx";
 import club from "../assets/club.svg";
 import diamond from "../assets/diamond.svg";
 import heart from "../assets/heart.svg";
@@ -12,18 +11,24 @@ type CardEditorProps = {
   value: number;
   suit: string;
   cardNumber: string;
+  cardCode: string;
+  onQuantityChange: (cardCode: string, newQuantity: number) => void;
 };
 
-const CardEditor: React.FC<CardEditorProps> = ({ quantity, value, suit, cardNumber }) => {
+const CardEditor: React.FC<CardEditorProps> = ({ quantity, value, suit, cardNumber, cardCode, onQuantityChange }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);
   const [currentValue, setCurrentValue] = useState(value);
 
   const quantityPlusOne = () => {
-    setCurrentQuantity(currentQuantity + 1);
+    const newQuantity = currentQuantity + 1;
+    setCurrentQuantity(newQuantity);
+    onQuantityChange(cardCode, newQuantity);
   };
   const quantityMinusOne = () => {
     if (currentQuantity >= 1) {
-      setCurrentQuantity(currentQuantity - 1);
+      const newQuantity = currentQuantity - 1;
+      setCurrentQuantity(newQuantity);
+      onQuantityChange(cardCode, newQuantity);
     } else return;
   };
   const valuePlusOne = () => {
@@ -63,7 +68,7 @@ const CardEditor: React.FC<CardEditorProps> = ({ quantity, value, suit, cardNumb
       break;
   }
   return (
-    <div className="bg-offblinding w-50 h-110 rounded shadow-sm shadow-black">
+    <div className="bg-offblinding font-serif w-50 h-110 rounded shadow-sm shadow-black">
       <div className="items-center self-center h-[60%] w-auto">
         <CardBase suit={suit} cardNumber={cardNumber} />
       </div>
