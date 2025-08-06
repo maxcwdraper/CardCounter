@@ -6,7 +6,7 @@ import CardEditor from "../components/CardEditor";
 
 const EditDeck: React.FC = () => {
   const [cardEditors, setCardEditors] = useState(cardEditorList);
-  const editorKeys = Object.keys(cardEditors);
+  const editorKeys: string[] = Object.keys(cardEditors);
   const handleQuantityChange = (code: string, newQuantity: number) => {
     setCardEditors((prev) => {
       prev[code].quantity = newQuantity;
@@ -16,10 +16,10 @@ const EditDeck: React.FC = () => {
   return (
     <div className="w-dvw min-h-screen">
       <div className="flex gap-5 font-serif justify-center">
-        <Link to="/customdeck" state={{ cardEditors }} className="flex text-2xl p-10">
+        <Link to="/customdeck" state={{ cardEditors }} className="flex text-2xl m-10">
           <p className="min-w-40 w-auto text-center border bg-gray-400 hover:bg-gray-600 hover:cursor-pointer rounded p-3">Save Changes</p>
         </Link>
-        <Link reloadDocument to="/edit" className="flex text-2xl p-10 self-center">
+        <Link reloadDocument to="/edit" className="flex text-2xl m-10 self-center">
           <p className="min-w-40 w-auto text-center border bg-gray-400 hover:bg-gray-600 hover:cursor-pointer rounded p-3">Reset</p>
         </Link>
       </div>
