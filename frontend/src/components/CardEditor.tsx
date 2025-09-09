@@ -5,15 +5,7 @@ import club from "../assets/club.svg";
 import diamond from "../assets/diamond.svg";
 import heart from "../assets/heart.svg";
 import spade from "../assets/spade.svg";
-
-type CardEditorProps = {
-  quantity: number;
-  value: number;
-  suit: string;
-  cardNumber: string;
-  cardCode: string;
-  onQuantityChange: (cardCode: string, newQuantity: number) => void;
-};
+import type { CardEditorProps } from "../types";
 
 const CardEditor: React.FC<CardEditorProps> = ({ quantity, value, suit, cardNumber, cardCode, onQuantityChange }) => {
   const [currentQuantity, setCurrentQuantity] = useState(quantity);

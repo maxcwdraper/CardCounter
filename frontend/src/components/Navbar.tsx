@@ -5,6 +5,7 @@ const navs = [
   { label: "Play (View Rules)", href: "/rules" },
   { label: "Edit Deck", href: "/edit" },
   { label: "View Deck", href: "/deck" },
+  { label: "Login/Sign Up", href: "/loginorsignup" },
 ];
 
 const Navbar: React.FC = () => {

@@ -2,13 +2,12 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 import CardBase from "../components/CardBase.tsx";
-import type { ApiResponse, DeckResponse } from "./Deck.tsx";
-import type { CardBaseProps } from "../components/CardBase.tsx";
 import cardEditors from "../components/CardEditorList.tsx";
 import club from "../assets/club.svg";
 import diamond from "../assets/diamond.svg";
 import heart from "../assets/heart.svg";
 import spade from "../assets/spade.svg";
+import type { ApiResponse, CardBaseProps, DeckResponse } from "../types";
 
 const CustomDeck: React.FC = () => {
   const [cards, setCards] = useState<CardBaseProps[]>([]);

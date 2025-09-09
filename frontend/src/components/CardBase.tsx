@@ -1,7 +1,4 @@
-export type CardBaseProps = {
-  suit: string;
-  cardNumber: string;
-};
+import type { CardBaseProps } from "../types";
 
 const CardBase: React.FC<CardBaseProps> = ({ suit, cardNumber }) => {
   let cardImage;

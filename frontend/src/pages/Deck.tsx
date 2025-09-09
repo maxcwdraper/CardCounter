@@ -1,21 +1,11 @@
 import { useEffect, useState } from "react";
+
 import CardBase from "../components/CardBase.tsx";
-import type { CardBaseProps } from "../components/CardBase.tsx";
 import club from "../assets/club.svg";
 import diamond from "../assets/diamond.svg";
 import heart from "../assets/heart.svg";
 import spade from "../assets/spade.svg";
-
-export type DeckResponse = {
-  deck_id: string;
-};
-
-export type ApiResponse = {
-  cards: {
-    value: string;
-    suit: string;
-  }[];
-};
+import type { ApiResponse, CardBaseProps, DeckResponse } from "../types";
 
 const Deck: React.FC = () => {
   const [cards, setCards] = useState<CardBaseProps[]>([]);
